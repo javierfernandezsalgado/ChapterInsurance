@@ -19,7 +19,7 @@ class Simulation(object):
             initialLost = initialRich * 0.75
             initialProtect = random.randint(0,1)
             initialInsurance = random.randint(0,1)
-            initailProbabilitySteal = 0.2,
+            initailProbabilitySteal = 0.2
             initialExpectUtility = random.uniform(0,1)
             initialSteal = random.randint(0,1)
             initialRichFinal = 0.6
@@ -59,6 +59,8 @@ class Simulation(object):
         for i in self.agents:
             counterAgentsInsurance = counterAgentsInsurance + i.isInsurance
             counterAgentsInsuranceAndSteal = counterAgentsInsuranceAndSteal + i.isInsurance * i.isSteal
+        if counterAgentsInsurance == 0 :
+            counterAgentsInsurance = 1
         self.priceInsurance = self.agents[0].lostSteal * (counterAgentsInsuranceAndSteal/counterAgentsInsurance)
 
         totalRich = 0
