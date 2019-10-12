@@ -15,7 +15,15 @@ class Simulation(object):
         self.totalCountProtected = []
         self.totalPriceInsurenace = []
         for i in range(numberAgents):
-            self.agents.append(agent.Agent(float(random.uniform(0,100)/100), 0.50, random.randint(0,1), random.randint(0,1), random.uniform(0,1), random.uniform(0,1), random.uniform(0,1), random.uniform(0,1)))
+            initialRich = float(random.uniform(0, 100) / 100)
+            initialLost = initialRich * 0.75
+            initialProtect = random.randint(0,1)
+            initialInsurance = random.randint(0,1)
+            initailProbabilitySteal = 0.2,
+            initialExpectUtility = random.uniform(0,1)
+            initialSteal = random.randint(0,1)
+            initialRichFinal = 0.6
+            self.agents.append(agent.Agent(initialRich , initialLost,initialProtect , initialInsurance,  initailProbabilitySteal, initialExpectUtility, initialRichFinal))
 
     def simulation (self,numberPeriods):
         for i in range(numberPeriods):

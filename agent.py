@@ -13,7 +13,7 @@ class Agent(object):
         self.isSteal = isSteal
         self.levelRichFinal = levelRichFinal
         self.friend = None
-        strategy = random.randint(0,2)
+        strategy = 1
         if strategy == 0:
             self.strategy = StrategyMax(self)
         elif strategy == 1:
@@ -33,28 +33,23 @@ class Agent(object):
     def updateLevelRichness(self,cr,cs):
         self.richLevel = self.richLevel - self.lostSteal - self.isSteal * ( 1 - self.isInsurance) - self.isProtect * cr - self.isInsurance * cs
 
-
-
-
 class Strategy(object):
     def __init__(self,parent):
         self.parent = parent
         pass
     def updateUsefulPercent(self,cr,cs,au):
         pass
+
 class StrategyMax(Strategy):
     def __init__(self, parent):
         super(StrategyMax, self).__init__(parent)
 
     def usefulPercent(self,cr,cs,au):
 
-        ucase0 = self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 0) - 0 * cr - 0 * cs
-
-        ucase1 =  self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 1) - 0 * cr - 1 * cs
-
-        ucase2 =  self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 0) - 1 * cr - 0 * cs
-
-        return  max(ucase0,ucase1,ucase2)
+        ucase0 = self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 0) - (0 * cr) - (0 * cs)
+        ucase1 = self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 1) - (0 * cr) - (1 * cs)
+        ucase2 = self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 0) - (1 * cr) - (0 * cs)
+        return max(ucase0, ucase1, ucase2)
 
 class StrategyImitation(Strategy):
     def __init__(self, parent: Agent):
