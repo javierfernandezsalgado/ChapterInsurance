@@ -61,7 +61,13 @@ class Simulation(object):
             counterAgentsInsuranceAndSteal = counterAgentsInsuranceAndSteal + i.isInsurance * i.isSteal
         if counterAgentsInsurance == 0 :
             counterAgentsInsurance = 1
-        self.priceInsurance = self.agents[0].lostSteal * (counterAgentsInsuranceAndSteal/counterAgentsInsurance)
+
+        selectedAgents = filter(lambda a: a.isInsurance == True and a.isSteal == True, self.agents)
+        try:
+            lostMedian = sum(map(lambda a: a.lostSteal,selectedAgents)) / float(len(list(selectedAgents)))
+            self.priceInsurance = lostMedian * (counterAgentsInsuranceAndSteal/counterAgentsInsurance)
+        except:
+            self.priceInsurance = 0.01
 
         totalRich = 0
         for i in self.agents:
@@ -93,7 +99,7 @@ class Simulation(object):
 
 
         plt.xlabel('Number simulation')
-        plt.ylabel('price')
+        plt.ylabel('Price')
         plt.title('Insurance simulation')
         plt.show()
 
@@ -105,7 +111,7 @@ class Simulation(object):
 if __name__ == '__main__':
     priceProtection = 0.05
     priceInsurance = 0.90
-    initialProtabilitySteal = 1
+    initialProtabilitySteal = 0.5
     averageUtility = 0.80
     numberAgents = 500
     s = Simulation(priceProtection, priceInsurance, initialProtabilitySteal, averageUtility, numberAgents)

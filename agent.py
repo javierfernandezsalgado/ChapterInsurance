@@ -48,7 +48,7 @@ class StrategyMax(Strategy):
 
         ucase0 = self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 0) - (0 * cr) - (0 * cs)
         ucase1 = self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 1) - (0 * cr) - (1 * cs)
-        ucase2 = self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 0) - (1 * cr) - (0 * cs)
+        ucase2 = self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 1) - (1 * cr) - (0 * cs)
 
         if max(ucase0, ucase1, ucase2) == ucase0:
             self.parent.isProtect = False
@@ -57,8 +57,8 @@ class StrategyMax(Strategy):
             self.parent.isProtect = False
             self.parent.isInsurance= True
         else:
-            self.parent.isProtect = False
-            self.parent.isInsurance= True
+            self.parent.isProtect = True
+            self.parent.isInsurance= False
 
         return max(ucase0, ucase1, ucase2)
 
