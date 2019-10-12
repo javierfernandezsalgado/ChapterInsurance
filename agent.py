@@ -25,7 +25,7 @@ class Agent(object):
         #self.richLevel - self.probabilitySteal * self.lostSteal * (1 - int(self.isInsurance)) - int(self.isProtect) * cr - int(self.isInsurance) * cs
         self.expectUtility = self.strategy.usefulPercent(cr, cs, au)
     def updateStealing(self,pa0):
-        value = random.uniform(100,0)
+        value = random.uniform(1,0)
         if value < pa0 and not self.isProtect:
             self.isSteal = True
         else:
