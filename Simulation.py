@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 class Simulation(object):
 
-    def __init__(self, priceProtection, priceInsurance, initialProtabilitySteal, averageUtility, numberAgents ):
+    def __init__(self, priceProtection, priceInsurance, initialProtabilitySteal, averageUtility, numberAgents):
         self.agents = []
         self.priceProtection = priceProtection
         self.priceInsurance = priceInsurance
@@ -15,11 +15,11 @@ class Simulation(object):
         self.totalCountProtected = []
         self.totalPriceInsurenace = []
         for i in range(numberAgents):
-            initialRich = float(random.uniform(0, 100) / 100)
+            initialRich = float(random.uniform(0, 1))
             initialLost = initialRich * 0.75
             initialProtect = random.randint(0,1)
             initialInsurance = random.randint(0,1)
-            initailProbabilitySteal = 0.8
+            initailProbabilitySteal =random.uniform(0.3,0.6)
             initialExpectUtility = random.uniform(0,1)
             initialSteal = random.randint(0,1)
             initialRichFinal = 0.6
@@ -70,7 +70,7 @@ class Simulation(object):
             lostMedian = sum(map(lambda a: a.lostSteal,selectedAgents)) / float(len(selectedAgents))
             self.priceInsurance = lostMedian * (counterAgentsInsuranceAndSteal/counterAgentsInsurance)
         except:
-            self.priceInsurance = 0.01
+            self.priceInsurance = self.priceInsurance * 0.95
 
         totalRich = 0
         for i in self.agents:
@@ -119,4 +119,3 @@ if __name__ == '__main__':
     numberAgents = 500
     s = Simulation(priceProtection, priceInsurance, initialProtabilitySteal, averageUtility, numberAgents)
     s.simulation(1000)
-
