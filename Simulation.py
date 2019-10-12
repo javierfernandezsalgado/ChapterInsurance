@@ -23,7 +23,8 @@ class Simulation(object):
             initialExpectUtility = random.uniform(0,1)
             initialSteal = random.randint(0,1)
             initialRichFinal = 0.6
-            self.agents.append(agent.Agent(initialRich , initialLost,initialProtect , initialInsurance,  initailProbabilitySteal, initialExpectUtility, initialRichFinal))
+            initialIsSteal = random.randint(0,1)
+            self.agents.append(agent.Agent(initialRich , initialLost,initialProtect , initialInsurance,  initailProbabilitySteal, initialExpectUtility, initialIsSteal,initialRichFinal))
 
     def simulation (self,numberPeriods):
         for i in range(numberPeriods):
