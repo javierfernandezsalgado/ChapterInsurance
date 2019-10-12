@@ -13,7 +13,7 @@ class Agent(object):
         self.isSteal = isSteal
         self.levelRichFinal = levelRichFinal
         self.friend = None
-        strategy = 1
+        strategy = 0
         if strategy == 0:
             self.strategy = StrategyMax(self)
         elif strategy == 1:
@@ -49,6 +49,17 @@ class StrategyMax(Strategy):
         ucase0 = self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 0) - (0 * cr) - (0 * cs)
         ucase1 = self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 1) - (0 * cr) - (1 * cs)
         ucase2 = self.parent.richLevel - self.parent.probabilitySteal * self.parent.lostSteal * (1 - 0) - (1 * cr) - (0 * cs)
+
+        if max(ucase0, ucase1, ucase2) == ucase0:
+            self.parent.isProtect = False
+            self.parent.isInsurance= False
+        elif max(ucase0, ucase1, ucase2) == ucase1:
+            self.parent.isProtect = False
+            self.parent.isInsurance= True
+        else:
+            self.parent.isProtect = False
+            self.parent.isInsurance= True
+
         return max(ucase0, ucase1, ucase2)
 
 class StrategyImitation(Strategy):
